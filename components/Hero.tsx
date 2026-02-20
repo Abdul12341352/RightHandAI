@@ -77,57 +77,68 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           </div>
         </motion.div>
 
-        {/* Right Side: Mockup / Video */}
+        {/* Right Side: Video Player */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
         >
-          <div className="bg-white rounded-3xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] overflow-hidden border border-slate-100 p-2">
-            <div className="aspect-video relative bg-slate-900 group cursor-pointer overflow-hidden rounded-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000" 
-                alt="Med Spa Reception" 
-                className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-700"
-              />
-              
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white">
-                  <Play size={40} fill="white" className="ml-1" />
+          {/* Outer Glow/Border Container */}
+          <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-400/20 to-blue-600/20 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
+            <div className="bg-white rounded-[2.3rem] overflow-hidden p-2 shadow-inner">
+              <div className="aspect-video relative bg-slate-900 group cursor-pointer overflow-hidden rounded-[1.8rem]">
+                <video 
+                  src="/input_file_0.mp4" 
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+                
+                {/* Play Button Overlay (Optional if autoplaying, but matches screenshot) */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white group-hover:scale-110 transition-transform">
+                    <Play size={32} fill="white" className="ml-1" />
+                  </div>
                 </div>
+
+                {/* Animated Floating Toasts - Positioned exactly as in screenshot */}
+                <motion.div 
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                  className="absolute top-8 right-8 glass p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/50 min-w-[180px]"
+                >
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                    <PhoneCall size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-slate-800">Incoming Call...</div>
+                    <div className="text-[10px] text-slate-500">AI Receptionist Active</div>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
+                  className="absolute bottom-8 left-8 glass p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/50 min-w-[180px]"
+                >
+                  <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+                    <Calendar size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-bold text-slate-800">Appointment Booked</div>
+                    <div className="text-[10px] text-slate-500">12:30 PM - Lip Filler</div>
+                  </div>
+                </motion.div>
               </div>
-
-              {/* Animated Floating Toasts */}
-              <motion.div 
-                animate={{ y: [10, -10, 10] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute top-6 right-6 glass p-4 rounded-xl shadow-xl flex items-center gap-3 border-l-4 border-blue-500"
-              >
-                <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                  <PhoneCall size={18} />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-800">Incoming Call...</div>
-                  <div className="text-[10px] text-slate-500">AI Receptionist Active</div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-6 left-6 glass p-4 rounded-xl shadow-xl flex items-center gap-3 border-l-4 border-emerald-500"
-              >
-                <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                  <Calendar size={18} />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-800">Appointment Booked</div>
-                  <div className="text-[10px] text-slate-500">12:30 PM - Lip Filler</div>
-                </div>
-              </motion.div>
             </div>
           </div>
+          
+          {/* Decorative elements behind the video */}
+          <div className="absolute -z-10 -top-10 -right-10 w-64 h-64 bg-blue-400/10 blur-3xl rounded-full" />
+          <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-indigo-400/10 blur-3xl rounded-full" />
         </motion.div>
       </div>
     </section>
