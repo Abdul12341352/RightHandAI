@@ -29,14 +29,6 @@ const FAQS = [
     a: "Our Elite plan is built for multi-site operations. The AI can intelligently route calls to the correct location or manage a centralized booking pool across all your branches."
   },
   {
-    q: "Can the AI process payments or deposits?",
-    a: "Yes. We can integrate with your payment processor to collect deposits or card-on-file details during the booking flow, reducing your no-show rate even further."
-  },
-  {
-    q: "What happens if a caller has a medical emergency?",
-    a: "We train the AI to recognize urgent keywords. In an emergency, it can be programmed to instantly patch the caller through to your direct line or provide emergency instructions."
-  },
-  {
     q: "Does it work in languages other than English?",
     a: "Yes. RightHandAI is multilingual and can seamlessly handle inquiries in Spanish, Arabic, French, and over 20 other languages based on your patient demographic."
   },
@@ -65,7 +57,7 @@ const Pricing: React.FC<PricingProps> = ({ onOpenDemo }) => {
           {/* Plan 1: Standard */}
           <motion.div
             whileHover={{ y: -10 }}
-            className="bg-slate-50 rounded-[40px] p-12 border border-slate-100 shadow-sm flex flex-col"
+            className="bg-slate-50 rounded-[40px] p-8 md:p-12 border border-slate-100 shadow-sm flex flex-col"
           >
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-slate-900 mb-2 font-heading">RightHandAI</h3>
@@ -73,7 +65,7 @@ const Pricing: React.FC<PricingProps> = ({ onOpenDemo }) => {
             </div>
             
             <div className="mb-10">
-              <span className="text-6xl font-black text-slate-900">$99</span>
+              <span className="text-5xl md:text-6xl font-black text-slate-900">$99</span>
               <span className="text-slate-400 ml-2 font-bold uppercase text-xs tracking-widest">/mo</span>
             </div>
 
@@ -111,7 +103,7 @@ const Pricing: React.FC<PricingProps> = ({ onOpenDemo }) => {
           {/* Plan 2: Elite */}
           <motion.div
             whileHover={{ y: -10 }}
-            className="bg-[#001f4d] rounded-[40px] p-12 text-white shadow-2xl relative overflow-hidden flex flex-col border border-white/5"
+            className="bg-[#001f4d] rounded-[40px] p-8 md:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col border border-white/5"
           >
             <div className="absolute top-0 right-0 p-8 opacity-10">
               <Sparkles size={140} />
@@ -126,7 +118,7 @@ const Pricing: React.FC<PricingProps> = ({ onOpenDemo }) => {
             </div>
             
             <div className="mb-10 relative z-10">
-              <span className="text-5xl font-black tracking-tight">Book a Demo</span>
+              <span className="text-4xl md:text-5xl font-black tracking-tight">Book a Demo</span>
               <p className="text-blue-400 text-xs mt-2 font-bold uppercase tracking-widest">Enterprise Volume Pricing</p>
             </div>
 
@@ -157,20 +149,35 @@ const Pricing: React.FC<PricingProps> = ({ onOpenDemo }) => {
 
         {/* Q&A Section */}
         <div id="qna" className="max-w-4xl mx-auto pt-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 font-heading">Questions & Answers</h2>
-            <p className="text-slate-500">Everything you need to know about scaling your spa with AI.</p>
+            <p className="text-slate-500 text-sm md:text-base">Everything you need to know about scaling your spa with AI.</p>
           </div>
           
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 gap-4">
             {FAQS.map((faq, i) => (
-              <div key={i} className="border border-slate-200 rounded-2xl overflow-hidden">
+              <div 
+                key={i} 
+                className={`group border rounded-3xl overflow-hidden transition-all duration-300 ${
+                  openFaq === i 
+                    ? 'border-blue-200 bg-blue-50/30 shadow-sm' 
+                    : 'border-slate-100 bg-white hover:border-slate-200 hover:shadow-sm'
+                }`}
+              >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full p-6 text-left flex justify-between items-center bg-white hover:bg-slate-50 transition-colors"
+                  className="w-full p-6 md:p-8 text-left flex justify-between items-center gap-4"
                 >
-                  <span className="font-bold text-slate-800 text-lg">{faq.q}</span>
-                  {openFaq === i ? <ChevronUp className="text-[#2563eb]" /> : <ChevronDown className="text-slate-400" />}
+                  <span className={`font-bold text-lg md:text-xl transition-colors ${
+                    openFaq === i ? 'text-[#2563eb]' : 'text-slate-800'
+                  }`}>
+                    {faq.q}
+                  </span>
+                  <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                    openFaq === i ? 'bg-[#2563eb] text-white rotate-180' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'
+                  }`}>
+                    <ChevronDown size={20} />
+                  </div>
                 </button>
                 <AnimatePresence>
                   {openFaq === i && (
@@ -178,9 +185,10 @@ const Pricing: React.FC<PricingProps> = ({ onOpenDemo }) => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden bg-slate-50"
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="p-6 text-slate-600 leading-relaxed border-t border-slate-200">
+                      <div className="px-6 pb-8 md:px-8 md:pb-10 text-slate-600 text-base md:text-lg leading-relaxed">
+                        <div className="h-px w-full bg-blue-100 mb-6" />
                         {faq.a}
                       </div>
                     </motion.div>
