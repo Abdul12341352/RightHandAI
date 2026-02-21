@@ -98,34 +98,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
     controls   // optional: add if you want play/pause buttons
   />
 </div>
- 
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                  className="absolute top-8 right-8 glass p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/50 min-w-[180px]"
-                >
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                    <PhoneCall size={18} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] font-bold text-slate-800">Incoming Call...</div>
-                    <div className="text-[10px] text-slate-500">AI Receptionist Active</div>
-                  </div>
-                </motion.div>
 
-                <motion.div 
-                  animate={{ y: [0, 8, 0] }}
-                  transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-                  className="absolute bottom-8 left-8 glass p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/50 min-w-[180px]"
-                >
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                    <Calendar size={18} />
-                  </div>
-                  <div>
-                    <div className="text-[11px] font-bold text-slate-800">Appointment Booked</div>
-                    <div className="text-[10px] text-slate-500">12:30 PM - Lip Filler</div>
-                  </div>
-                </motion.div>
-              </div>
             </div>
           </div>
           
