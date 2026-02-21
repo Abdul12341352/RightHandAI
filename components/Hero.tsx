@@ -87,26 +87,18 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           {/* Outer Glow/Border Container */}
           <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-400/20 to-blue-600/20 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
             <div className="bg-white rounded-[2.3rem] overflow-hidden p-2 shadow-inner">
-              <div className="aspect-video relative bg-slate-900 group cursor-pointer overflow-hidden rounded-[1.8rem]">
-               <video 
-  src="/superad.mp4" 
-  className="w-full h-full object-cover"
-  autoPlay
-  muted
-  loop
-  playsInline
-/>
+              <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
+  <video
+    src="/superad.mp4"
+    className="w-full h-full object-cover"
+    autoPlay
+    muted
+    loop
+    playsInline
+    controls   // optional: add if you want play/pause buttons
+  />
+</div>
  
-                
-                {/* Play Button Overlay (Optional if autoplaying, but matches screenshot) */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
-                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white group-hover:scale-110 transition-transform">
-                    <Play size={32} fill="white" className="ml-1" />
-                  </div>
-                </div>
-
-                {/* Animated Floating Toasts - Positioned exactly as in screenshot */}
-                <motion.div 
                   animate={{ y: [0, -8, 0] }}
                   transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                   className="absolute top-8 right-8 glass p-3 rounded-2xl shadow-xl flex items-center gap-3 border border-white/50 min-w-[180px]"
