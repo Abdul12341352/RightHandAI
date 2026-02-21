@@ -88,14 +88,15 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-400/20 to-blue-600/20 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
             <div className="bg-white rounded-[2.3rem] overflow-hidden p-2 shadow-inner">
               <div className="aspect-video relative bg-slate-900 group cursor-pointer overflow-hidden rounded-[1.8rem]">
-                <video 
-                  src="/superad.mp4" 
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
+               <video 
+  src="/superad.mp4" 
+  className="w-full h-full object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+/>
+ 
                 
                 {/* Play Button Overlay (Optional if autoplaying, but matches screenshot) */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/0 transition-colors">
