@@ -89,7 +89,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
             <div className="bg-white rounded-[2.3rem] overflow-hidden p-2 shadow-inner">
               <div className="aspect-video relative bg-slate-900 group cursor-pointer overflow-hidden rounded-[1.8rem]">
                 <video 
-                  src="/super ad (1).mp4" 
+                  src="/superad.mp4" 
                   className="w-full h-full object-cover"
                   autoPlay
                   muted
