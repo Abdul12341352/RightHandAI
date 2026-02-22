@@ -1,16 +1,9 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Pause, DollarSign, TrendingUp } from 'lucide-react';
+import { Play, Pause, TrendingUp } from 'lucide-react';
 import { AudioCard } from '../types';
 
-const DEMOS:const AUDIO_FILES: Record<string, string> = {
-  "botox-1": "/Botox.mp3",
-  "botox-2": "/Botox2.mp3",
-  "massage": "/DeepTissue.mp3",
-  "lipfiller": "/LipFiller.mp3",
-};
- AudioCard[] = [
+const DEMOS: AudioCard[] = [
   {
     id: 'botox-1',
     title: 'Botox Booking Call',
@@ -37,27 +30,36 @@ const DEMOS:const AUDIO_FILES: Record<string, string> = {
   }
 ];
 
+// 👇 New mapping for audio files
+const AUDIO_FILES: Record<string, string> = {
+  "botox-1": "/Botox.mp3",
+  "botox-2": "/Botox2.mp3",
+  "massage": "/DeepTissue.mp3",
+  "lipfiller": "/LipFiller.mp3",
+};
+
 const AudioDemos: React.FC = () => {
   const [playingId, setPlayingId] = useState<string | null>(null);
 
+  // 👇 Replaced togglePlay function
   const togglePlay = (id: string) => {
-  const audioEl = document.getElementById(id) as HTMLAudioElement | null;
+    const audioEl = document.getElementById(id) as HTMLAudioElement | null;
 
-  if (playingId === id) {
-    if (audioEl) audioEl.pause();
-    setPlayingId(null);
-  } else {
-    if (playingId) {
-      const currentEl = document.getElementById(playingId) as HTMLAudioElement | null;
-      if (currentEl) currentEl.pause();
+    if (playingId === id) {
+      if (audioEl) audioEl.pause();
+      setPlayingId(null);
+    } else {
+      if (playingId) {
+        const currentEl = document.getElementById(playingId) as HTMLAudioElement | null;
+        if (currentEl) currentEl.pause();
+      }
+      if (audioEl) {
+        audioEl.currentTime = 0;
+        audioEl.play();
+      }
+      setPlayingId(id);
     }
-    if (audioEl) {
-      audioEl.currentTime = 0;
-      audioEl.play();
-    }
-    setPlayingId(id);
-  }
-};
+  };
 
   return (
     <section id="demos" className="py-24 bg-white">
@@ -78,14 +80,21 @@ const AudioDemos: React.FC = () => {
                 <button
                   onClick={() => togglePlay(demo.id)}
                   className={`w-16 h-16 rounded-full flex items-center justify-center transition-all ${
-                    playingId === demo.id ? 'royal-blue-gradient text-white scale-110 shadow-xl' : 'bg-white text-[#0047AB] shadow-md hover:shadow-lg'
+                    playingId === demo.id
+                      ? 'royal-blue-gradient text-white scale-110 shadow-xl'
+                      : 'bg-white text-[#0047AB] shadow-md hover:shadow-lg'
                   }`}
                 >
-                  {playingId === demo.id ? <Pause size={24} fill="white" /> : <Play size={24} className="ml-1" fill="currentColor" />}
+                  {playingId === demo.id ? (
+                    <Pause size={24} fill="white" />
+                  ) : (
+                    <Play size={24} className="ml-1" fill="currentColor" />
+                  )}
                 </button>
               </div>
-              <audio id={demo.id} src={AUDIO_FILES[demo.id]} />
 
+              {/* 👇 Hidden audio element for each card */}
+              <audio id={demo.id} src={AUDIO_FILES[demo.id]} />
 
               <h3 className="text-xl font-bold text-slate-900 mb-2 text-center">{demo.title}</h3>
               <p className="text-slate-500 text-sm mb-6 text-center leading-relaxed">
@@ -99,7 +108,6 @@ const AudioDemos: React.FC = () => {
                 </div>
               </div>
 
-              {/* Fake Waveform animation when playing */}
               {playingId === demo.id && (
                 <div className="mt-4 flex justify-center items-end gap-1 h-8">
                   {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
