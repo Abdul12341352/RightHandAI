@@ -94,7 +94,12 @@ const AudioDemos: React.FC = () => {
               </div>
 
               {/* 👇 Hidden audio element for each card */}
-              <audio id={demo.id} src={AUDIO_FILES[demo.id]} />
+             <audio
+  id={demo.id}
+  src={AUDIO_FILES[demo.id]}
+  onEnded={() => setPlayingId(null)}
+/>
+
 
               <h3 className="text-xl font-bold text-slate-900 mb-2 text-center">{demo.title}</h3>
               <p className="text-slate-500 text-sm mb-6 text-center leading-relaxed">
