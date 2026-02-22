@@ -89,15 +89,16 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
             <div className="bg-white rounded-[2.3rem] overflow-hidden p-2 shadow-inner">
               <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
   <video
-    src="/superad.mp4"
-    className="w-full h-full object-cover"
-    autoPlay
-    muted
-    loop
-    playsInline
-    controls   // optional: add if you want play/pause buttons
-  />
-</div>
+  className="w-full h-full object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+>
+  <source src="/superad.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 
             </div>
           </div>
