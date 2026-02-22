@@ -90,8 +90,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
              <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
   <video
     className="w-full h-full object-cover"
-    autoPlay
-    muted
+    controls
     loop
     playsInline
   >
