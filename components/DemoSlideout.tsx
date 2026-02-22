@@ -49,7 +49,7 @@ const DemoSlideout: React.FC<DemoSlideoutProps> = ({ onClose }) => {
         <div className="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar bg-slate-50/30">
           <div style={{ backgroundColor: "#f8fafc", borderRadius: "12px", overflow: "hidden", height: "100%" }}>
             <iframe
-              src="https://cal.com/work-please-joasem/ai-receptionist-client"
+              src="https://cal.com/work-please-joasem/ai-receptionist-client?layout=form_only"
               style={{ width: "100%", height: "100%", border: "none" }}
               title="Book a Demo"
             />
@@ -61,3 +61,4 @@ const DemoSlideout: React.FC<DemoSlideoutProps> = ({ onClose }) => {
 };
 
 export default DemoSlideout;
+
