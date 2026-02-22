@@ -87,28 +87,27 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           {/* Outer Glow/Border Container */}
           <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-400/20 to-blue-600/20 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
             <div className="bg-white rounded-[2.3rem] overflow-hidden p-2 shadow-inner">
-              <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
+             <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
   <video
-  className="w-full h-full object-cover"
-  autoPlay
-  muted
-  loop
-  playsInline
->
-  <source src="/superad.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
-
-            </div>
-          </div>
+    className="w-full h-full object-cover"
+    autoPlay
+    muted
+    loop
+    playsInline
+  >
+    <source src="/superad.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+            </div> {/* closes inner white container */}
+          </div>   {/* closes outer glow container */}
           
           {/* Decorative elements behind the video */}
           <div className="absolute -z-10 -top-10 -right-10 w-64 h-64 bg-blue-400/10 blur-3xl rounded-full" />
           <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-indigo-400/10 blur-3xl rounded-full" />
-        </motion.div>
-      </div>
-    </section>
+        </motion.div> {/* closes right-side motion.div */}
+      </div> {/* closes grid container */}
+    </section> {/* closes hero section */}
   );
 };
 
