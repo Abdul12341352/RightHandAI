@@ -61,4 +61,3 @@ const DemoSlideout: React.FC<DemoSlideoutProps> = ({ onClose }) => {
 };
 
 export default DemoSlideout;
-
