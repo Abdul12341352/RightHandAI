@@ -4,7 +4,13 @@ import { motion } from 'framer-motion';
 import { Play, Pause, DollarSign, TrendingUp } from 'lucide-react';
 import { AudioCard } from '../types';
 
-const DEMOS: AudioCard[] = [
+const DEMOS:const AUDIO_FILES: Record<string, string> = {
+  "botox-1": "/Botox.mp3",
+  "botox-2": "/Botox2.mp3",
+  "massage": "/DeepTissue.mp3",
+  "lipfiller": "/LipFiller.mp3",
+};
+ AudioCard[] = [
   {
     id: 'botox-1',
     title: 'Botox Booking Call',
@@ -35,8 +41,23 @@ const AudioDemos: React.FC = () => {
   const [playingId, setPlayingId] = useState<string | null>(null);
 
   const togglePlay = (id: string) => {
-    setPlayingId(playingId === id ? null : id);
-  };
+  const audioEl = document.getElementById(id) as HTMLAudioElement | null;
+
+  if (playingId === id) {
+    if (audioEl) audioEl.pause();
+    setPlayingId(null);
+  } else {
+    if (playingId) {
+      const currentEl = document.getElementById(playingId) as HTMLAudioElement | null;
+      if (currentEl) currentEl.pause();
+    }
+    if (audioEl) {
+      audioEl.currentTime = 0;
+      audioEl.play();
+    }
+    setPlayingId(id);
+  }
+};
 
   return (
     <section id="demos" className="py-24 bg-white">
@@ -63,6 +84,8 @@ const AudioDemos: React.FC = () => {
                   {playingId === demo.id ? <Pause size={24} fill="white" /> : <Play size={24} className="ml-1" fill="currentColor" />}
                 </button>
               </div>
+              <audio id={demo.id} src={AUDIO_FILES[demo.id]} />
+
 
               <h3 className="text-xl font-bold text-slate-900 mb-2 text-center">{demo.title}</h3>
               <p className="text-slate-500 text-sm mb-6 text-center leading-relaxed">
