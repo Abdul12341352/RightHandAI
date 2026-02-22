@@ -105,9 +105,9 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           {/* Decorative elements behind the video */}
           <div className="absolute -z-10 -top-10 -right-10 w-64 h-64 bg-blue-400/10 blur-3xl rounded-full" />
           <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-indigo-400/10 blur-3xl rounded-full" />
-        </motion.div> {/* closes right-side motion.div */}
-      </div> {/* closes grid container */}
-    </section> {/* closes hero section */}
+        </motion.div> 
+      </div> 
+    </section>
   );
 };
 
