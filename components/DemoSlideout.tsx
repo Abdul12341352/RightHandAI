@@ -1,27 +1,11 @@
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
-import { useEffect } from 'react';
 
 interface DemoSlideoutProps {
   onClose: () => void;
 }
 
 const DemoSlideout: React.FC<DemoSlideoutProps> = ({ onClose }) => {
-  useEffect(() => {
-    // Load Cal.com script dynamically
-    const script = document.createElement("script");
-    script.src = "https://cal.com/embed.js";
-    script.async = true;
-    script.onload = () => {
-      if (typeof (window as any).Cal !== "undefined") {
-        (window as any).Cal("book-demo", { 
-          calLink: "https://cal.com/work-please-joasem/ai-receptionist-client" 
-        });
-      }
-    };
-    document.body.appendChild(script);
-  }, []);
-
   return (
     <>
       <motion.div
@@ -57,13 +41,46 @@ const DemoSlideout: React.FC<DemoSlideoutProps> = ({ onClose }) => {
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar bg-slate-50/30 flex flex-col items-center justify-center">
-          <button
-            id="book-demo"
-            className="w-full py-4 md:py-5 bg-[#2563eb] text-white rounded-2xl font-bold text-lg md:text-xl hover:bg-blue-700 transition-all flex items-center justify-center gap-3 mt-6 md:mt-8 shadow-xl shadow-blue-100 transform hover:-translate-y-1 active:translate-y-0"
-          >
-            Book a Demo
-          </button>
+        <div className="flex-1 overflow-y-auto p-8 md:p-12 custom-scrollbar bg-slate-50/30">
+          {/* Cal.com Inline Embed */}
+          <div style={{ width: "100%", height: "100%", overflow: "scroll" }} id="my-cal-inline-ai-receptionist-client"></div>
+          <script type="text/javascript">
+            {`
+              (function (C, A, L) { 
+                let p = function (a, ar) { a.q.push(ar); }; 
+                let d = C.document; 
+                C.Cal = C.Cal || function () { 
+                  let cal = C.Cal; 
+                  let ar = arguments; 
+                  if (!cal.loaded) { 
+                    cal.ns = {}; 
+                    cal.q = cal.q || []; 
+                    d.head.appendChild(d.createElement("script")).src = A; 
+                    cal.loaded = true; 
+                  } 
+                  if (ar[0] === L) { 
+                    const api = function () { p(api, arguments); }; 
+                    const namespace = ar[1]; 
+                    api.q = api.q || []; 
+                    if(typeof namespace === "string"){ 
+                      cal.ns[namespace] = cal.ns[namespace] || api; 
+                      p(cal.ns[namespace], ar); 
+                      p(cal, ["initNamespace", namespace]); 
+                    } else p(cal, ar); 
+                    return;
+                  } 
+                  p(cal, ar); 
+                }; 
+              })(window, "https://app.cal.com/embed/embed.js", "init");
+              Cal("init", "ai-receptionist-client", {origin:"https://app.cal.com"});
+              Cal.ns["ai-receptionist-client"]("inline", {
+                elementOrSelector:"#my-cal-inline-ai-receptionist-client",
+                config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+                calLink: "work-please-joasem/ai-receptionist-client",
+              });
+              Cal.ns["ai-receptionist-client"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+            `}
+          </script>
         </div>
       </motion.div>
     </>
