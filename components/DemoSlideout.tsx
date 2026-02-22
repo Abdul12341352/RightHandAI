@@ -13,11 +13,11 @@ const DemoSlideout: React.FC<DemoSlideoutProps> = ({ onClose }) => {
     script.src = "https://cal.com/embed.js";
     script.async = true;
     script.onload = () => {
-      // Attach Cal.com to your button once script is ready
-      // @ts-ignore (Cal is injected globally by the script)
-      Cal("book-demo", { 
-        calLink: "https://cal.com/work-please-joasem/ai-receptionist-client" 
-      });
+      if (typeof (window as any).Cal !== "undefined") {
+        (window as any).Cal("book-demo", { 
+          calLink: "https://cal.com/work-please-joasem/ai-receptionist-client" 
+        });
+      }
     };
     document.body.appendChild(script);
   }, []);
