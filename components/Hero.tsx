@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play, Calendar, PhoneCall } from 'lucide-react';
+import { Play } from 'lucide-react';
 
 interface HeroProps {
   onOpenDemo: () => void;
@@ -19,7 +18,6 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
   return (
     <section className="pt-32 pb-20 md:pt-48 md:pb-32 relative overflow-hidden bg-white">
       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        {/* Left Side: Content */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -46,14 +44,14 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           <div className="flex flex-col sm:flex-row gap-6 mb-16">
             <button 
               onClick={onOpenDemo}
-              className="px-10 py-5 bg-[#2563eb] text-white rounded-full font-bold text-xl hover:bg-blue-700 transition-all hover:shadow-2xl hover:shadow-blue-200 transform hover:-translate-y-1 active:translate-y-0"
+              className="px-10 py-5 bg-[#2563eb] text-white rounded-full font-bold text-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200"
             >
               Activate Your AI
             </button>
             <a 
               href="#demos"
               onClick={scrollToDemos}
-              className="px-10 py-5 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-xl hover:bg-slate-50 transition-all transform hover:-translate-y-1 inline-flex items-center justify-center gap-3"
+              className="px-10 py-5 bg-white border border-slate-200 text-slate-700 rounded-full font-bold text-xl hover:bg-slate-50 transition-all inline-flex items-center justify-center gap-3"
             >
               <Play size={22} fill="currentColor" />
               Hear It In Action
@@ -63,12 +61,10 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           <div className="flex items-center gap-6">
             <div className="flex -space-x-3">
               {[1, 2, 3, 4].map((i) => (
-                <img 
-                  key={i} 
-                  src={`https://picsum.photos/seed/${i + 50}/100/100`} 
-                  alt="Spa Owner" 
-                  className="w-12 h-12 rounded-full border-2 border-white object-cover shadow-sm" 
-                />
+                <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-slate-200 shadow-sm overflow-hidden">
+                  {/* Using a placeholder that won't lag the network like picsum */}
+                  <div className="w-full h-full bg-blue-100 flex items-center justify-center text-[10px] text-blue-400">User</div>
+                </div>
               ))}
             </div>
             <p className="text-sm font-medium text-slate-500">
@@ -77,35 +73,32 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           </div>
         </motion.div>
 
-        {/* Right Side: Video Player */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, x: 50 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
         >
-          {/* Outer Glow/Border Container */}
-          <div className="relative p-1 rounded-[2.5rem] bg-gradient-to-br from-blue-400/20 to-blue-600/20 shadow-[0_0_50px_-12px_rgba(59,130,246,0.3)]">
-            <div className="bg-white rounded-[2.3rem] overflow-hidden p-2 shadow-inner">
-             <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
-  <video
-    className="w-full h-full object-cover"
-    controls
-    loop
-    playsInline
-  >
-    <source src="/superad.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
-            </div> {/* closes inner white container */}
-          </div>   {/* closes outer glow container */}
+          <div className="relative p-1 rounded-[2.5rem] bg-blue-100/50 shadow-xl">
+            <div className="bg-white rounded-[2.3rem] overflow-hidden p-2">
+              <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
+                <video
+                  className="w-full h-full object-cover"
+                  controls
+                  loop
+                  playsInline
+                  preload="metadata"
+                  muted
+                >
+                  <source src="/superad.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
           
-          {/* Decorative elements behind the video */}
-          <div className="absolute -z-10 -top-10 -right-10 w-64 h-64 bg-blue-400/10 blur-3xl rounded-full" />
-          <div className="absolute -z-10 -bottom-10 -left-10 w-64 h-64 bg-indigo-400/10 blur-3xl rounded-full" />
-        </motion.div> 
-      </div> 
+          <div className="absolute -z-10 -top-5 -right-5 w-32 h-32 bg-blue-400/10 blur-2xl rounded-full" />
+        </motion.div>
+      </div>
     </section>
   );
 };
