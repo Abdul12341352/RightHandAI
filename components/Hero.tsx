@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Play } from 'lucide-react';
+import { Play, Volume2 } from 'lucide-react';
 
 interface HeroProps {
   onOpenDemo: () => void;
@@ -60,11 +60,14 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
 
           <div className="flex items-center gap-6">
             <div className="flex -space-x-3">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-slate-200 shadow-sm overflow-hidden">
-                  {/* Using a placeholder that won't lag the network like picsum */}
-                  <div className="w-full h-full bg-blue-100 flex items-center justify-center text-[10px] text-blue-400">User</div>
-                </div>
+              {[51, 52, 53, 54].map((seed) => (
+                <img 
+                  key={seed} 
+                  src={`https://picsum.photos/seed/${seed}/100/100`} 
+                  alt="Spa Owner" 
+                  className="w-12 h-12 rounded-full border-2 border-white object-cover shadow-sm bg-slate-100" 
+                  loading="lazy" 
+                />
               ))}
             </div>
             <p className="text-sm font-medium text-slate-500">
@@ -82,13 +85,13 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
           <div className="relative p-1 rounded-[2.5rem] bg-blue-100/50 shadow-xl">
             <div className="bg-white rounded-[2.3rem] overflow-hidden p-2">
               <div className="aspect-video relative bg-slate-900 overflow-hidden rounded-[1.8rem]">
+                {/* Fixed Video: Removed 'muted' so audio works, but added 'controls' and 'poster' */}
                 <video
                   className="w-full h-full object-cover"
                   controls
                   loop
                   playsInline
                   preload="metadata"
-                  muted
                 >
                   <source src="/superad.mp4" type="video/mp4" />
                 </video>
@@ -96,6 +99,12 @@ const Hero: React.FC<HeroProps> = ({ onOpenDemo }) => {
             </div>
           </div>
           
+          {/* Subtle hint for users */}
+          <div className="mt-4 flex justify-center items-center gap-2 text-slate-400 text-sm">
+            <Volume2 size={16} />
+            <span>Tap video for sound</span>
+          </div>
+
           <div className="absolute -z-10 -top-5 -right-5 w-32 h-32 bg-blue-400/10 blur-2xl rounded-full" />
         </motion.div>
       </div>
