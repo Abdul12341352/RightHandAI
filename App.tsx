@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import AudioDemos from './components/AudioDemos';
@@ -45,6 +46,8 @@ const App: React.FC = () => {
         <div className="absolute top-[-5%] left-[-5%] w-[300px] h-[300px] rounded-full bg-blue-100/20 blur-[60px]" />
         <div className="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] rounded-full bg-blue-50/20 blur-[60px]" />
       </div>
+      
+      <Analytics />
     </div>
   );
 };
