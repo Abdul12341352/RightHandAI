@@ -10,6 +10,18 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [react()],
+      build: {
+        rollupOptions: {
+          // Add this block to stop the "failed to resolve import" error
+          external: [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            'lucide-react',
+            'framer-motion'
+          ],
+        },
+      },
       define: {
         'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
         'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
