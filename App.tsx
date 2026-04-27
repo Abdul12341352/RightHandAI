@@ -17,22 +17,21 @@ const MainPage: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const openDemo = () => {
-    // This scrolls to your contact/footer area instead of a missing page
+  const scrollToContact = () => {
     const footer = document.querySelector('footer');
     footer?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 overflow-x-hidden">
-      <Header scrolled={scrolled} onOpenDemo={openDemo} />
+      <Header scrolled={scrolled} onOpenDemo={scrollToContact} />
       <main>
-        <Hero onOpenDemo={openDemo} />
+        <Hero onOpenDemo={scrollToContact} />
         <CallSection />
         <AudioDemos />
-        <Pricing onOpenDemo={openDemo} />
+        <Pricing onOpenDemo={scrollToContact} />
       </main>
-      <Footer onOpenDemo={openDemo} />
+      <Footer onOpenDemo={scrollToContact} />
     </div>
   );
 };
