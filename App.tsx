@@ -18,8 +18,9 @@ const MainPage: React.FC = () => {
   }, []);
 
   const openDemo = () => {
-    // This makes the button scroll to the bottom instead of crashing the site
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    // This safely scrolls to your pricing/contact info since the demo page is missing
+    const footer = document.querySelector('footer');
+    footer?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -32,6 +33,10 @@ const MainPage: React.FC = () => {
         <Pricing onOpenDemo={openDemo} />
       </main>
       <Footer onOpenDemo={openDemo} />
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+        <div className="absolute top-[-5%] left-[-5%] w-[300px] h-[300px] rounded-full bg-blue-100/20 blur-[60px]" />
+        <div className="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] rounded-full bg-blue-50/20 blur-[60px]" />
+      </div>
     </div>
   );
 };
