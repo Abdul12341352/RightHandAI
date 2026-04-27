@@ -6,7 +6,9 @@ import AudioDemos from './components/AudioDemos';
 import CallSection from './components/CallSection';
 import Pricing from './components/Pricing';
 import Footer from './components/Footer';
-import BookDemo from './pages/BookDemo';
+
+// CHANGED THIS LINE BELOW:
+import BookDemo from '@/pages/BookDemo';
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
