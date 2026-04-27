@@ -18,7 +18,7 @@ const MainPage: React.FC = () => {
   }, []);
 
   const openDemo = () => {
-    // This safely scrolls to your pricing/contact info since the demo page is missing
+    // This scrolls to your contact/footer area instead of a missing page
     const footer = document.querySelector('footer');
     footer?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -33,10 +33,6 @@ const MainPage: React.FC = () => {
         <Pricing onOpenDemo={openDemo} />
       </main>
       <Footer onOpenDemo={openDemo} />
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-[-5%] left-[-5%] w-[300px] h-[300px] rounded-full bg-blue-100/20 blur-[60px]" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] rounded-full bg-blue-50/20 blur-[60px]" />
-      </div>
     </div>
   );
 };
