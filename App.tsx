@@ -7,9 +7,6 @@ import CallSection from './components/CallSection';
 import Pricing from './components/Pricing';
 import Footer from './components/Footer';
 
-// CHANGED THIS LINE BELOW:
-import BookDemo from '@/pages/BookDemo';
-
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -20,26 +17,21 @@ const MainPage: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const openDemo = () => navigate('/book-demo');
+  const openDemo = () => {
+    // This makes the button scroll to the bottom instead of crashing the site
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 overflow-x-hidden">
       <Header scrolled={scrolled} onOpenDemo={openDemo} />
-
       <main>
         <Hero onOpenDemo={openDemo} />
         <CallSection />
         <AudioDemos />
         <Pricing onOpenDemo={openDemo} />
       </main>
-
       <Footer onOpenDemo={openDemo} />
-
-      {/* Background decoration */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
-        <div className="absolute top-[-5%] left-[-5%] w-[300px] h-[300px] rounded-full bg-blue-100/20 blur-[60px]" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[300px] h-[300px] rounded-full bg-blue-50/20 blur-[60px]" />
-      </div>
     </div>
   );
 };
@@ -49,7 +41,6 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/book-demo" element={<BookDemo />} />
       </Routes>
     </BrowserRouter>
   );
